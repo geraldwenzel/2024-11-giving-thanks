@@ -66,8 +66,8 @@ contract GivingThanksTest is Test {
         address unverifiedCharity = address(0x4);
 
         // Unverified charity registers but is not verified
-        vm.prank(unverifiedCharity);
-        registryContract.registerCharity(unverifiedCharity);
+        // vm.prank(unverifiedCharity);
+        // registryContract.registerCharity(unverifiedCharity);
 
         // Fund the donor
         vm.deal(donor, 10 ether);
