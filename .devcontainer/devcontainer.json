@@ -1,0 +1,21 @@
+{
+	"name": "Foundry",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"nomicfoundation.hardhat-solidity",
+				"esbenp.prettier-vscode",
+				"tamasfe.even-better-toml"
+			]
+		}
+	},
+	"forwardPorts": [8545],
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
+	],
+	"runArgs": ["--env-file", ".env"],
+	"postCreateCommand": "bash -x /tmp/install-foundry-zksync && rm /tmp/install-foundry-zksync && rm $(pwd)/foundryup-zksync"
+}
