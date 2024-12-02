@@ -20,6 +20,34 @@ contract GivingThanks is ERC721URIStorage {
 
     function donate(address charity) public payable {
         require(registry.isVerified(charity), "Charity not verified");
+        /* gSEC
+        
+        There are several ways to send Ether to the `charity` address in Solidity. Here are three common methods:
+
+        1. **Using `transfer`**:
+        ```solidity
+        charity.transfer(msg.value);
+        ```
+
+        2. **Using `send`**:
+        ```solidity
+        bool sent = charity.send(msg.value);
+        require(sent, "Failed to send Ether");
+        ```
+
+        3. **Using `call`** (already used in your code):
+        ```solidity
+        (bool sent,) = charity.call{value: msg.value}("");
+        require(sent, "Failed to send Ether");
+        ```
+
+        ### Comparison:
+        - **`transfer`**: Automatically reverts on failure, forwards 2300 gas, and is considered safe for simple transfers.
+        - **`send`**: Returns a boolean indicating success or failure, forwards 2300 gas, and requires manual error handling.
+        - **`call`**: More flexible, forwards all available gas by default, and can be used for calling functions on the target contract. It requires careful handling to avoid reentrancy attacks.
+
+        In your case, using `call` is appropriate if you need to forward all available gas or interact with a contract. If you only need to send Ether without interacting with a contract, `transfer` or `send` might be simpler and safer.
+        */
         (bool sent,) = charity.call{value: msg.value}("");
         require(sent, "Failed to send Ether");
 
