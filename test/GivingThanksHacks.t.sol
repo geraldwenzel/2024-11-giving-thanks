@@ -31,9 +31,6 @@ contract GivingThanksTest is Test {
         // Register and verify the charity
         vm.prank(charity);
         registryContract.registerCharity(charity);
-
-        // vm.prank(admin);
-        // registryContract.verifyCharity(charity);
     }
 
     function testDonateToUnverifiedCharity() public {
@@ -42,7 +39,7 @@ contract GivingThanksTest is Test {
         // Fund the donor
         vm.deal(donor, 10 ether);
 
-        // Donor donates to the charity
+        // Donor donates to unverified charity
         vm.prank(donor);
         charityContract.donate{value: donationAmount}(charity);
     }
