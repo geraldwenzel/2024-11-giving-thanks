@@ -29,7 +29,7 @@ contract GivingThanksTest is Test {
         charityContract = new GivingThanks(address(registryContract));
 
         // Register and verify the charity
-        vm.prank(admin);
+        vm.prank(charity);
         registryContract.registerCharity(charity);
 
         vm.prank(admin);
