@@ -21,9 +21,6 @@ contract BadCharityRegistry {
     }
 
     function isVerified(address charity) public view returns (bool) {
-        /* gSEC
-        checks registeredCharities instead of verifiedCharities
-        */
         registeredCharities[charity];
         // return !registeredCharities[charity];
         return false;
