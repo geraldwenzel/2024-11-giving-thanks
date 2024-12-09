@@ -22,7 +22,6 @@ contract BadCharityRegistry {
 
     function isVerified(address charity) public view returns (bool) {
         registeredCharities[charity];
-        // return !registeredCharities[charity];
         return false;
     }
 
