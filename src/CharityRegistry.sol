@@ -21,9 +21,6 @@ contract CharityRegistry {
     }
 
     function isVerified(address charity) public view returns (bool) {
-        /* gSEC
-        checks registeredCharities instead of verifiedCharities
-        */
         return registeredCharities[charity];
     }
 
