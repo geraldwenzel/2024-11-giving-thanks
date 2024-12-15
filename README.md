@@ -1,6 +1,6 @@
 # Giving Thanks Report
 
-I discovered two high level exploits in the [Cyfrin GivingThanks contest](https://codehawks.cyfrin.io/c/2024-11-giving-thanks). I did not participate in the contest while it was active. I did not look at [the results](https://codehawks.cyfrin.io/c/2024-11-giving-thanks/results?t=report&page=1) of the contest prior to studying the code base for exploits. I discoved two high level exploits that match the two high level exploits in the results. Going forward, I am going to write my POCs so they fail instead of pass so they can be added to a test suite.
+I discovered two high level exploits in the [Cyfrin GivingThanks contest](https://codehawks.cyfrin.io/c/2024-11-giving-thanks). I did not participate in the contest while it was active. I did not look at [the results](https://codehawks.cyfrin.io/c/2024-11-giving-thanks/results?t=report&page=1) of the contest prior to studying the code base for exploits. I discoved two high level exploits that match the two high level exploits in the results.  
 
 I cloned [the original repository](https://github.com/Cyfrin/2024-11-giving-thanks), updated the remotes, and renamed the [original README](original_README.md). I then created this README which includes a report of my findings.  
 
