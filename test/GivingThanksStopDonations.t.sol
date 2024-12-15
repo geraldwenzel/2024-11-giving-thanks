@@ -56,6 +56,5 @@ contract GivingThanksTest is Test {
         // Donation should fail because the charity is not verified
         vm.expectRevert();
         charityContract.donate{value: donationAmount}(charity);
-
     }
 }
