@@ -1,72 +1,50 @@
-# First Flight #28: GivingThanks
+# Giving Thanks Report
 
-- Starts: November 07, 2024 Noon UTC
-- Ends: November 14, 2024 Noon UTC
+I discovered two high level exploits in the [Cyfrin GivingThanks contest](https://codehawks.cyfrin.io/c/2024-11-giving-thanks). I did not participate in the contest while it was active. I did not look at [the results](https://codehawks.cyfrin.io/c/2024-11-giving-thanks/results?t=report&page=1) of the contest prior to studying the code base for exploits. I discoved two high level exploits that match the two high level exploits in the results.  
 
-- nSLOC: 67
+I cloned [the original repository](https://github.com/Cyfrin/2024-11-giving-thanks), updated the remotes, and renamed the [original README](original_README.md). I then created this README which includes a report of my findings.  
 
-[//]: # (contest-details-open)
+## Exploits
 
-## About the Project
+### Donation to Unverified Charity
 
-About the Project
+#### Invariant
 
-GivingThanks is a decentralized platform that embodies the spirit of Thanksgiving by enabling donors to contribute Ether to registered and verified charitable causes. Charities can register themselves, and upon verification by the trusted admin, they become eligible to receive donations from generous participants. When donors make a donation, they receive a unique NFT as a donation receipt, commemorating their contribution. The NFT's metadata includes the donor's address, the date of the donation, and the amount donated.
+Donors should only donate to verified charities.
 
-## Actors
+#### Proof of Concept
 
-- Admin (Trusted) - Can verify registered charities.
-- Charities - Can register to receive donations once verified.
-- Donors - Can donate Ether to verified charities and receive a donation receipt NFT.
+ `GivingThanks.sol` has a `donate` function that requires a charity to be verified before accepting donations. However, the `isVerified` function in `CharityRegistry.sol` checks if the charity is registered as opposed to verified. This allows a donor to donate to an unverified charity.
 
-[//]: # (contest-details-close)
-[//]: # (scope-open)
+ The `testDonateToUnverifiedCharity` function in `GivingThanksHacks.t.sol` demonstrates this exploit.
 
-## Scope (contracts)
+#### Fix
 
-```
-All Contracts in `src` are in scope.
-```
+Change the `isVerified` function in `CharityRegistry.sol` to check if the charity is verified.
 
-```js
-├── src
-│   ├── CharityRegistry.sol
-│   └── GivingThanks.sol
-
+```solidity
+function isVerified(address charity) public view returns (bool) {
+    return verifiedCharities[charity];
+}
 ```
 
-## Compatibilities
+### Donations can be halted
 
-Compatibilities:
-Blockchains: - Ethereum/Any EVM
-Tokens: - ETH - ERC721
+#### Invariant
 
-[//]: # (scope-close)
-[//]: # (getting-started-open)
+Donations should not be able to be halted.
 
-## Setup
+#### Proof of Concept
 
-Build:
+`GivingThanks.sol` has a public function called `updateRegistry` that allows anyone to update the charity registry to a new address. The `setUp` function in `GivingThanksStopDonations.t.sol` registers and verifies a charity, per a normal work flow. However, the function `testStopDonations` demonstrates that the charity registry can be updated to a new address by any user. In this case, the charity registry is updated to an address that does not have any charities registered, effectively halting donations to previously registered and verified charities.
 
-```bash
-git clone https://github.com/Cyfrin/2024-11-giving-thanks.git
+#### Fix
 
-cd 2024-11-giving-thanks
+Require that only the owner of the contract can update the charity registry.
 
-forge build
+```solidity
+function updateRegistry(address newRegistry) public {
+    require(msg.sender == owner, "Only the owner can update the registry");
+    charityRegistry = CharityRegistry(newRegistry);
+}
 ```
-
-Tests:
-
-```bash
-Forge test
-```
-
-[//]: # (getting-started-close)
-[//]: # (known-issues-open)
-
-## Known Issues
-
-No known issues
-
-[//]: # (known-issues-close)
