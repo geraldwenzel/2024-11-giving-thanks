@@ -42,6 +42,9 @@ contract NftReentracy is Test {
     }
 
     function testNftReentrancy() public {
+        /**
+         * @dev Demonstrates a reentrancy attack against GivingThanks.donate()
+         */
         uint256 donationAmount = 1 ether;
 
         // show the number of tokens before the reentrancy attack
