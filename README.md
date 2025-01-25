@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD024 -->
 # GivingThanks Report
 
 I discovered two high level exploits in the [Cyfrin GivingThanks contest](https://codehawks.cyfrin.io/c/2024-11-giving-thanks). I did not participate in the contest while it was active. I did not look at [the results](https://codehawks.cyfrin.io/c/2024-11-giving-thanks/results?t=report&page=1) of the contest prior to studying the code base for exploits. I discoved two high level exploits that match the two high level exploits in the results.  
