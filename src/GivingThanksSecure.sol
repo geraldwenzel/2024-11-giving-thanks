@@ -18,22 +18,8 @@ contract GivingThanksSecure is ERC721URIStorage {
         tokenCounter = 0;
     }
 
-    // DELETE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // WHEN DONE STUDYING CHECKS-EFFECTS-INTERACTIONS
-    // function withdraw(uint amount) public {
-    //     // checks
-    //     require(balances[msg.sender] >= amount);
-
-    //     // effects
-    //     balances[msg.sender] -= amount;
-
-    //     // interactions
-    //     msg.sender.transfer(amount);
-    // }
-
     function donate(address charity) public payable {
         // Checks
-        // check if this new require statement prevents reentrancy
         require(msg.sender != charity, "Donor cannot be the charity");
         require(registry.isVerified(charity), "Charity not verified");
 
