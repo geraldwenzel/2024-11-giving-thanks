@@ -6,14 +6,15 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "nomicfoundation.hardhat-solidity",
-        "esbenp.prettier-vscode",
-        "tamasfe.even-better-toml",
-        "davidanson.vscode-markdownlint",
         "bierner.markdown-mermaid",
         "bierner.markdown-preview-github-styles",
         "bierner.markdown-checkbox",
-        "bierner.markdown-footnotes"
+        "bierner.markdown-footnotes",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "github.vscode-github-actions",
+        "nomicfoundation.hardhat-solidity",
+        "tamasfe.even-better-toml"
       ]
     }
   },
